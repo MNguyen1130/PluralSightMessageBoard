@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Contact Us";
+}
+
+<div>
+    <h2>@ViewBag.Title</h2>
+    <p>In order to contact us, fill out the following information below. You can also send us mail.</p>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="well">
+                <form class="form-horizontal" method="post">
+                    <fieldset>
+                        <legend>Your Info</legend>
+                        
+                        <div class="form-group">
+                            <label for="inputName" class="col-lg-2 control-label">Name</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" id="inputName" name="name" placeholder="Name" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-lg-2 control-label required">Email</label>
+                            <div class="col-lg-10">
+                                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputWebsite" class="col-lg-2 control-label">Website</label>
+                            <div class="col-lg-10">
+                                <input type="url" class="form-control" id="inputWebsite" name="website" placeholder="http://www.google.com"  title='Remember to include http://' />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputMessage" class="col-lg-2 control-label required">Message</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="3" id="inputMessage" name="message" required ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="reset" class="btn btn-default">Reset</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                @if(ViewBag.MailSent != null && ViewBag.MailSent)
+                                {
+                                    <div>Mail Sent!</div>
+                                }
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="well">
+                <p>
+                    <address>
+                        <strong>Twitter, Inc</strong><br />
+                        795 Folsom Ave, Suite 600<br />
+                        San Francisco, CA 94107<br />
+                        (123) 456-7890<br />
+                        <br />
+                        <strong>Full Name</strong><br />
+                        <a href="mailto:#">first.last@gmail.com</a>
+                    </address>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
