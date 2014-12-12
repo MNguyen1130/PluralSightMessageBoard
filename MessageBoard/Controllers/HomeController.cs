@@ -5,21 +5,25 @@ using System.Web;
 using System.Web.Mvc;
 using MessageBoard.Models;
 using MessageBoard.Services;
+using MessageBoard.Data;
 
 namespace MessageBoard.Controllers
 {
     public class HomeController : Controller
     {
         private IMailService _mail;
+        private IMessageBoardRepository _repo;
 
-        public HomeController(IMailService mail)
+        public HomeController(IMailService mail, IMessageBoardRepository repo)
         {
             _mail = mail;
+            _repo = repo;
         }
 
         public ActionResult Index()
         {
-            return View();
+            var topics = _repo.GetTopics().OrderByDescending(t => t.Created).Take(25).ToList();
+             return View(topics);
         }
 
         public ActionResult About()
