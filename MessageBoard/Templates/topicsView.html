@@ -1,19 +1,12 @@
-﻿@model IEnumerable<MessageBoard.Data.Topic>
-@{
-    ViewBag.Title = "Home Page";
-    ViewBag.InitModule = "homeIndex";
-}
-@section Scripts {
-    <script src="~/Js/home-index.js"></script>
-}
-
-<div data-ng-view></div>
-
-@*<div id="ngController" ng-controller="HomeIndexController">
+﻿<div>
     <div class="message-header">
         <h1>Message Board</h1>
         <p class="lead">Lastest Messages...</p>
         <div>Message Count: {{ data.length }}</div>
+    </div>
+
+    <div>
+        <a href="#/newmessage" class="btn btn-primary">Add New Message</a>
     </div>
 
     <div class="progress progress-striped" data-ng-show="isBusy">
@@ -49,4 +42,4 @@
         </div>
 
     </div>
-</div>*@
+</div>

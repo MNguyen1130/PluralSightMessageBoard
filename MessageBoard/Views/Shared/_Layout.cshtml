@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="myApp">
+<html data-ng-app="@ViewBag.InitModule">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,6 +40,7 @@
     </div>
 
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/angular-route.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
