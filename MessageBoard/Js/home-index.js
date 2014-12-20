@@ -1,6 +1,7 @@
 ﻿// home-index.js
 var module = angular.module("homeIndex", ['ngRoute']);//.controller("topicsController", function topicsController($scope, $http) {
 
+// Routing
 module.config(function ($routeProvider) {
     $routeProvider.when("/", {
         controller: "TopicsController",
@@ -20,6 +21,7 @@ module.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: "/" });
 });
 
+// Services
 module.factory("dataService", function ($http, $q) {
     var _topics = [];
     var _isInit = false;
@@ -110,18 +112,38 @@ module.factory("dataService", function ($http, $q) {
 
         return deferred.promise;
     };
+    
+    var _saveReply = function (topic, newReply) {
+        var deferred = $q.defer();
 
+        $http.post("/api/v1/topics/" + topic.id + "/replies", newReply)
+            .then(function (result) {
+                // Success
+                if (!topic.replies)
+                    topic.replies = [];
+                topic.replies.push(result.data);
+                deferred.resolve(result.data);
+            },
+            function () {
+                // Error
+                deferred.reject();
+            });
 
+        return deferred.promise;
+    }
 
     return {
         topics: _topics,
         getTopics: _getTopics,
         addTopic: _addTopic,
         isReady: _isReady,
-        getTopicById: _getTopicById
+        getTopicById: _getTopicById,
+        saveReply: _saveReply
     };
 });
 
+// Controllers
+// TopicsController - Home page showing all Messages
 module.controller("TopicsController", function ($scope, dataService) {
 
     $scope.data = dataService;
@@ -143,6 +165,7 @@ module.controller("TopicsController", function ($scope, dataService) {
     }
 });
 
+// NewTopicController - Creating a new message
 module.controller("NewTopicController", function ($scope, $http, $window, dataService) {
     $scope.newTopic = {};
 
@@ -159,6 +182,7 @@ module.controller("NewTopicController", function ($scope, $http, $window, dataSe
     };
 });
 
+// SingleTopicController - Drill down into a single Message to see the replies, as well as reply to the message
 module.controller("SingleTopicController", function ($scope, dataService, $window, $routeParams) {
     $scope.topic = null;
     $scope.newReply = {};
@@ -174,6 +198,14 @@ module.controller("SingleTopicController", function ($scope, dataService, $windo
         });
 
     $scope.addReply = function () {
-
+        dataService.saveReply($scope.topic, $scope.newReply)
+            .then(function () {
+                // Success
+                $scope.newReply.body = "";
+            },
+            function () {
+                // Error
+                alert("Could not save the new reply");
+            });
     };
 });
