@@ -1,0 +1,47 @@
+﻿<br /><a href="#/" class="btn btn-primary">Back</a><br /><br />
+<div class="messages">
+    <div class="message row">
+        <div class="title col-lg-9">
+            {{ topic.title }}
+        </div>
+        <div class="date col-lg-3 text-right">
+            {{ topic.created | date:"medium" }}
+        </div>
+        <div class="content col-lg-12">
+            {{ topic.body }}
+        </div>
+        <div class="replies col-lg-12">
+            <div class="reply" data-ng-repeat="r in topic.replies">
+                <div class="date pull-right">
+                    {{ r.created | date:"medium" }}
+                </div>
+                <div class="content">
+                    {{ r.body }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <br /><br />
+            <form name="newReplyForm" class="form-horizontal" data-ng-submit="addReply()">
+                <fieldset>
+                    <legend>Enter Your Reply</legend>
+
+                    <div class="form-group">
+                        <label for="body" class="col-lg-1 control-label required">Body</label>
+                        <div class="col-lg-11">
+                            <textarea class="form-control" rows="5" name="body" data-ng-model="newReply.body" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <button type="reset" class="btn btn-default">Reset</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>

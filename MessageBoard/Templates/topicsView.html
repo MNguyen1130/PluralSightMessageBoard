@@ -2,7 +2,7 @@
     <div class="message-header">
         <h1>Message Board</h1>
         <p class="lead">Lastest Messages...</p>
-        <div>Message Count: {{ data.length }}</div>
+        <div>Message Count: {{ data.topics.length }}</div>
     </div>
 
     <div>
@@ -14,9 +14,9 @@
     </div>
 
     <div class="messages">
-        <div class="message row" data-ng-repeat="i in data">
+        <div class="message row" data-ng-repeat="i in data.topics">
             <div class="title col-lg-9">
-                {{ i.title }}
+                <a class="text-primary" data-ng-href="#/message/{{ i.id }}">{{ i.title }}</a>
             </div>
             <div class="date col-lg-3 text-right">
                 {{ i.created | date:"medium" }}
@@ -24,22 +24,6 @@
             <div class="content col-lg-12">
                 {{ i.body }}
             </div>
-            <div class="toolbar col-lg-12">
-                <button class="btn btn-primary btn-sm reply-button">
-                    Reply
-                </button>
-            </div>
-            <div class="replies col-lg-12">
-                <div class="reply" data-ng-repeat="r in i.replies">
-                    <div class="date pull-right">
-                        {{ r.created | date:"medium" }}
-                    </div>
-                    <div class="content">
-                        {{ r.body }}
-                    </div>
-                </div>
-            </div>
         </div>
-
     </div>
 </div>
